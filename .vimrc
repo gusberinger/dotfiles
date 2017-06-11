@@ -7,6 +7,7 @@ Plug 'justinmk/vim-sneak' " move around doc quickly
 Plug 'itchyny/lightline.vim' " menu bar
 Plug 'kien/ctrlp.vim' " fuzzy finder
 Plug 'tpope/vim-fugitive' " git wrapper
+Plug 'darfink/vim-plist' " plist support
 call plug#end()
 
 " Basic  Configuration
