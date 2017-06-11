@@ -5,23 +5,16 @@ Plug 'tpope/vim-commentary' " better commenting
 Plug 'tpope/vim-vinegar' " better file organizer
 Plug 'justinmk/vim-sneak' " move around doc quickly
 Plug 'itchyny/lightline.vim' " menu bar
+Plug 'kien/ctrlp.vim' " fuzzy finder
 call plug#end()
-
-
-
-" Plugins
-" Not anything but the essential shit:
-" lightline: menu bar
-" vinegar: file sorter that is actually useful
-" sneak: move around document quickly
 
 " Basic  Configuration
 filetype plugin on
-filetype indent on      " load filetype-specific indent files
+filetype indent on
 filetype on
 syntax on
 set number
-set mouse=a				" enable Mouse Support
+set mouse=a		" enable Mouse Support
 set nocompatible
 set showcmd             " show command in bottom bar
 set wildmenu            " visual autocomplete for command menu
@@ -69,16 +62,16 @@ set laststatus=2 " always have lightline on
 
 " Writing Specific Features
 augroup writing
-	au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md set ft=markdown
+    au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md set ft=markdown
 augroup END
 
 " Python specific Features
 augroup Python
-	au FileType python set expandtab " enter spaces when tab is pressed
-	au FileType python set colorcolumn=80
-	au FileType python nmap <F9> :!python %<cr>
-	au FileType python set tabstop=4           " use 4 spaces to represent tab
-	set softtabstop=4		" TODO learn softtabstop
-	set autoindent          " copy indent from current line when starting a new line
-	set shiftwidth=4        " number of spaces to use for auto indent
+    au FileType python set expandtab " enter spaces when tab is pressed
+    au FileType python set colorcolumn=80
+    au FileType python nmap <F9> :!python %<cr>
+    au FileType python set tabstop=4           " use 4 spaces to represent tab
+    set softtabstop=4		" TODO learn softtabstop
+    set autoindent          " copy indent from current line when starting a new line
+    set shiftwidth=4        " number of spaces to use for auto indent
 augroup END
