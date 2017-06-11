@@ -6,6 +6,7 @@ Plug 'tpope/vim-vinegar' " better file organizer
 Plug 'justinmk/vim-sneak' " move around doc quickly
 Plug 'itchyny/lightline.vim' " menu bar
 Plug 'kien/ctrlp.vim' " fuzzy finder
+Plug 'tpope/vim-fugitive' " git wrapper
 call plug#end()
 
 " Basic  Configuration
@@ -27,8 +28,8 @@ set ic                  " ignore Case
 set display=lastline    " show everything in wrapped text instead of @ symbol
 
 " File Sorting
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+' " hides everything in netrw
-let g:ctrlp_working_path_mode = '~/Desktop/Python' " limits Ctrl-P search to just directory
+let g:netrw_list_hide = '.*\.swp$,.DS_Store,.*\.pyc,.*\.git/' " 
+" let g:ctrlp_working_path_mode = '~/Desktop/Python' " limits Ctrl-P search to just directory
 
 " Key Mappings & Notes
 " map foo boo; does boo when press foo
@@ -63,6 +64,8 @@ set laststatus=2 " always have lightline on
 " Writing Specific Features
 augroup writing
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md set ft=markdown
+    au FileType python, latex setlocal linebreak
+    au FileType python, latex setlocal spell 
 augroup END
 
 " Python specific Features
