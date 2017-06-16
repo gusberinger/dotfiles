@@ -1,13 +1,16 @@
 " Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'vim-syntastic/syntastic' | Plug 'kevinw/pyflakes-vim' " syntax errors for python
+Plug 'vim-syntastic/syntastic' " syntax errors for python
 Plug 'tpope/vim-commentary' " better commenting
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar' " better file organizer
+Plug 'tpope/vim-fugitive' " git wrapper
+Plug 'airblade/vim-gitgutter' " git changes in gutter
 Plug 'justinmk/vim-sneak' " move around doc quickly
 Plug 'itchyny/lightline.vim' " menu bar
 Plug 'kien/ctrlp.vim' " fuzzy finder
-Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'darfink/vim-plist' " plist support
+
 call plug#end()
 
 " Basic  Configuration
@@ -65,8 +68,8 @@ set laststatus=2 " always have lightline on
 " Writing Specific Features
 augroup writing
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md set ft=markdown
-    au FileType python, latex setlocal linebreak
-    au FileType python, latex setlocal spell 
+    au FileType markdown setlocal linebreak
+    au FileType markdown setlocal spell 
 augroup END
 
 " Python specific Features
