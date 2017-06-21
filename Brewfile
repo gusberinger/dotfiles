@@ -6,7 +6,7 @@ cask 'iterm2'
 brew 'heroku'
 brew 'python3'
 brew 'wget'
-cask 'haskell-platform'
+brew 'tmux'
 brew 'pandoc'
 brew 'neofetch'
 
