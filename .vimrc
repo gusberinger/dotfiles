@@ -10,6 +10,7 @@ Plug 'justinmk/vim-sneak' " move around doc quickly
 Plug 'itchyny/lightline.vim' " menu bar
 Plug 'kien/ctrlp.vim' " fuzzy finder
 Plug 'darfink/vim-plist' " plist support
+Plug 'neovimhaskell/haskell-vim' " haskell scripts
 
 call plug#end()
 
@@ -61,9 +62,19 @@ set splitright
 set background=light
 colorscheme solarized
 let g:lightline = {
-\ 'colorscheme': 'solarized',
-\ }
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
 set laststatus=2 " always have lightline on
+
+
 
 " Writing Specific Features
 augroup writing
@@ -76,7 +87,7 @@ augroup END
 augroup Python
     au FileType python set expandtab " enter spaces when tab is pressed
     au FileType python set colorcolumn=80
-    au FileType python nmap <F9> :!python %<cr>
+    au FileType python nmap <F9> :!python3 %<cr>
     au FileType python set tabstop=4           " use 4 spaces to represent tab
     set softtabstop=4		" TODO learn softtabstop
     set autoindent          " copy indent from current line when starting a new line
