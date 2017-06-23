@@ -17,3 +17,8 @@ alias hide_files='defaults write com.apple.finder AppleShowAllFiles NO'
 
 # setup thefuck
 eval $(thefuck --alias)
+
+# virtualenv
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Desktop
+source /usr/local/bin/virtualenvwrapper.sh
