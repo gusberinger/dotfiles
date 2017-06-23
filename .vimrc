@@ -1,6 +1,7 @@
-" Plugins
+""" Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'vim-syntastic/syntastic' " syntax errors for python
+Plug 'chriskempson/base16-vim'
 Plug 'tpope/vim-commentary' " better commenting
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar' " better file organizer
@@ -14,7 +15,7 @@ Plug 'neovimhaskell/haskell-vim' " haskell scripts
 
 call plug#end()
 
-" Basic  Configuration
+""" Basic  Configuration
 filetype plugin on
 filetype indent on
 filetype on
@@ -32,7 +33,7 @@ set hlsearch            " highlight matches
 set ic                  " ignore Case
 set display=lastline    " show everything in wrapped text instead of @ symbol
 
-" File Sorting
+""" File Sorting
 let g:netrw_list_hide = '.*\.swp$,.DS_Store,.*\.pyc,.*\.git/' " 
 " let g:ctrlp_working_path_mode = '~/Desktop/Python' " limits Ctrl-P search to just directory
 
@@ -48,19 +49,21 @@ nnoremap K kzz
 inoremap jk <Esc>|" easy escapes
 nnoremap yyy :%w !pbcopy<cr><cr>|" yank entire document
 
-" Leader Mappings
+""" Leader Mappings
 let mapleader="\<space>"
 nnoremap <leader><space> :nohl<cr>
 nnoremap <leader>ev :vsp $MYVIMRC<cr>
 nnoremap <leader>sv :so $MYVIMRC<cr>
 
-" Vim Splits
+""" Vim Splits
 set splitbelow " open split down and to the right
 set splitright
 
-" Theme
-set background=light
-colorscheme solarized
+""" Theme
+" let base16colorspace=256  " Access colors present in 256 colorspace
+set t_Co=256
+" set background=light
+colorscheme base16-ocean
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'active': {
@@ -74,16 +77,14 @@ let g:lightline = {
 
 set laststatus=2 " always have lightline on
 
-
-
-" Writing Specific Features
+""" Writing Specific Features
 augroup writing
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md set ft=markdown
     au FileType markdown setlocal linebreak
     au FileType markdown setlocal spell 
 augroup END
 
-" Python specific Features
+""" Python specific Features
 augroup Python
     au FileType python set expandtab " enter spaces when tab is pressed
     au FileType python set colorcolumn=80
@@ -93,3 +94,9 @@ augroup Python
     set autoindent          " copy indent from current line when starting a new line
     set shiftwidth=4        " number of spaces to use for auto indent
 augroup END
+
+""" Desktop Features
+set guioptions= " remove the scrollbars
+set noerrorbells " remove the bell
+set novisualbell
+set t_vb=
