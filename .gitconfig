@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+#	name = Gus Beringer
+#	email = gusberinger@gmail.com
+[user]
+	name = Gus Beringer
+	email = gusberinger@gmail.com
+[core]
+	excludesfile = /Users/gusberinger/.gitignore
+[branch "master"]
+	mergeoptions = --no-ff
