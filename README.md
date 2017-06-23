@@ -1,7 +1,3 @@
-In order to symlink vimrc use following commands:
+In order to symlink dotfiles run the script:
+    ~/dotfiles/symlink.sh
 
-    ln -sf ~/dotfiles/.vimrc ~/.vimrc
-
-    ln -sf ~/dotfiles/.vim ~/.vim
-
-    ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
