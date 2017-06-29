@@ -106,6 +106,7 @@ kwmc config spawn left
 
 kwmc rule owner="iTerm2" properties={role="AXDialog"}
 kwmc rule owner="Steam" properties={float="true"}
+kwmc rule owner="Kodi" properties={float="true"}
 kwmc rule owner="Photoshop" properties={float="true"}
 
 # Enable border for focused window

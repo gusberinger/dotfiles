@@ -1,25 +1,31 @@
-# set the modes
+# Set the prefix
 shift + cmd - b                :   khd -e "mode activate prefix";\
-				kwmc config border focused size 6
+				   kwmc config border focused size 6
+# Set the swap
+prefix - f		       :   khd -e "mode activate swap"
+
+# Return to default
+swap + shift + cmd - b         :   khd -e "mode activate default";\
+				   kwmc config border focused size 1
+
 prefix + shift + cmd - b       :   khd -e "mode activate default";\
-				kwmc config border focused size 1
-# prefix + space		       :   khd -e "mode activate space"
+				   kwmc config border focused size 1
+# iTerm
+prefix - return		       :   open -a /Applications/iTerm.app;\
+				   khd -e "mode activate default"
 
-# prefixes
-prefix - return       :   open -a /Applications/iTerm.app;\
-                            khd -e "mode activate default"
+# Reload config
+prefix - r		       :   khd -e "reload" # reload config
 
-# Change the viewing mode
-prefix - r            :   khd -e "reload" # reload config
+# Change viewing mode
+prefix - a                     :   kwmc space -t bsp;\
+			           khd -e "mode activate default"
+prefix - s                     :   kwmc space -t monocle;\
+			           khd -e "mode activate default"
+prefix - d                     :   kwmc space -t float;\
+			           khd -e "mode activate default"
 
-prefix - a               :   kwmc space -t bsp;\
-			     khd -e "mode activate default"
-prefix - s               :   kwmc space -t monocle;\
-			     khd -e "mode activate default"
-prefix - d               :   kwmc space -t float;\
-			     khd -e "mode activate default"
-
-# set border color for different modes
+# Set border color for different modes
 khd mode default on_enter kwmc config border focused color 0xddd5c4a1
 khd mode prefix on_enter kwmc config border focused color 0xddbdd322
 #
@@ -31,12 +37,18 @@ prefix + space - k            :   kwmc window -f north
 prefix + space - n            :   kwmc window -fm prev
 prefix + space - m            :   kwmc window -fm next
 
-# resize windows
-prefix - h                :   kwmc window -c expand 0.05 west
-prefix - k                :   kwmc window -c expand 0.05 north
-prefix + shift - h        :   kwmc window -c reduce 0.05 west
-prefix + shift - k        :   kwmc window -c reduce 0.05 north
+# Resize windows
+prefix - h                    :   kwmc window -c expand 0.05 west
+prefix - k                    :   kwmc window -c expand 0.05 north
+prefix + shift - h            :   kwmc window -c reduce 0.05 west
+prefix + shift - k            :   kwmc window -c reduce 0.05 north
 
-# set border color for different modes
+# Swap mode
+swap - h                      :   kwmc window -s west
+swap - j                      :   kwmc window -s south
+swap - k                      :   kwmc window -s north
+swap - l                      :   kwmc window -s east
+
+# Set border color for different modes
 khd mode default on_enter kwmc config border focused color 0xddd5c4a1
 khd mode prefix on_enter kwmc config border focused color 0xddbdd322
