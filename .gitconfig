@@ -1,12 +1,19 @@
 # This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
-#	name = Gus Beringer
-#	email = gusberinger@gmail.com
-[user]
 	name = Gus Beringer
 	email = gusberinger@gmail.com
 [core]
 	excludesfile = /Users/gusberinger/.gitignore
-[branch "master"]
+[branch]
 	mergeoptions = --no-ff
+[alias]
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+[github]
+	user = gusberinger
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain
+[merge]
+	ff = false
