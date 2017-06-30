@@ -22,3 +22,8 @@ eval $(thefuck --alias)
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Desktop
 source /usr/local/bin/virtualenvwrapper.sh
+
+# Iterm
+alias solarized='echo -e "\033]50;SetProfile=Solarized\a"'
+alias ocean='echo -e "\033]50;SetProfile=Ocean\a"'
+
