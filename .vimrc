@@ -27,6 +27,9 @@ set showcmd             " show command in bottom bar
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set ttyfast             " faster cursor movements
+set ttimeout            " faster speed
+set ttimeoutlen=250
+set notimeout
 set showmatch           " highlight matching [{()}]
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
@@ -41,6 +44,7 @@ let g:netrw_list_hide = '.*\.swp$,.DS_Store,.*\.pyc,.*\.git/' "
 " map foo boo; does boo when press foo
 " imap, nmap, vmap, map when in insert/normal/visual
 " *noremap = nonrecursive; use instead of *map
+
 command! W write " allows :W
 nnoremap j gj|" navigate wrapped text
 nnoremap k gk
@@ -87,7 +91,7 @@ augroup END
 """ Python specific Features
 augroup Python
     au FileType python set expandtab " enter spaces when tab is pressed
-    au FileType python set colorcolumn=80
+    " au FileType python set colorcolumn=80
     au FileType python nmap <F9> :!python3 %<cr>
     au FileType python set tabstop=4           " use 4 spaces to represent tab
     set softtabstop=4		" TODO learn softtabstop
@@ -100,3 +104,6 @@ set guioptions= " remove the scrollbars
 set noerrorbells " remove the bell
 set novisualbell
 set t_vb=
+
+""" Copy / Paste Mode
+nnoremap <F10> :setlocal paste!<cr>
