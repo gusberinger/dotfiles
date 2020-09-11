@@ -7,10 +7,14 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(setq vc-follow-symlinks t)
+
 (use-package evil
   :ensure t
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line))
 
 (use-package key-chord
   :ensure t
@@ -26,20 +30,21 @@
 (use-package base16-theme
   :ensure t
   :config
-  (load-theme 'base16-zenburn t))
+  (load-theme 'base16-solarized-light t))
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(if nil (string-equal system-type "darwin")
+    (menu-bar-mode -1)
+  (menu-bar-mode 1))
+
+(exec-path-from-shell-initialize)
+(setq ispell-program-name "/usr/local/bin/aspell")
 
 (use-package company
   :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode))
-
-(use-package company-auctex
-  :ensure t
-  :config
-  (company-auctex-init))
 
 (use-package ivy
   :ensure t
@@ -61,7 +66,6 @@
   :config
   (yas-global-mode 1))
 
-
 (use-package which-key
   :ensure t
   :config
@@ -71,14 +75,90 @@
   :load-path "~/.emacs.d/doom-snippets"
   :after yasnippet)
 
+(use-package treemacs
+  :ensure t)
+
+
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
+
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
+
+(use-package nov
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+(defun my-nov-font-setup ()
+  (face-remap-add-relative 'variable-pitch :family "Liberation Serif"
+                                           :height 1.0))
+(add-hook 'nov-mode-hook 'my-nov-font-setup)
+
+
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 
+
+;; Buffer Settings
+(global-visual-line-mode 1)
+
+(with-eval-after-load "ispell"
+	(setq ispell-program-name "aspell")
+	(ispell-set-spellchecker-params)
+	(setq ispell-dictionary "en_US"))
+
+(defun my-shell-setup ()
+	(interactive)
+	(setq buffer-face-mode-face '(:family "Hack Nerd Font" :height 160))
+	(buffer-face-mode))
+(add-hook 'eshell-mode-hook #'my-shell-setup)
+
+
+(custom-theme-set-faces
+	'user
+	'(variable-pitch ((t (:family "iA Writer Quattro S" :height 200 :foreground "#a5967e"))))
+	'(fixed-pitch ((t (:family "iA Writer Mono S" :height 180 ))))
+	'(flyspell-incorrect ((t (:foreground "#d3ebe9" :background "#c23127"))))
+	'(header-line ((t (:background "#1c1e1f" :height 220))))
+	'(org-document-title        ((t (:foreground "#f2f2f2" :weight bold :height 400))))
+	'(org-meta-line             ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+	'(org-document-info         ((t (:foreground "#51c4b5"))))
+	'(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+	'(org-block                 ((t (:inherit fixed-pitch))))
+	'(org-link                  ((t (:foreground "royal blue" :underline t))))
+	'(org-property-value        ((t (:inherit fixed-pitch))) t)
+	'(org-special-keyword       ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+	'(org-tag                   ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+	'(org-verbatim              ((t (:inherit (shadow fixed-pitch)))))
+	'(org-indent                ((t (:inherit (org-hide fixed-pitch)))))
+	'(org-level-1               ((t (:foreground "#ffaf69"))))
+	'(org-level-2               ((t (:foreground "#3fc6b7"))))
+	'(org-level-3               ((t (:foreground "#dc4d59"))))
+	'(org-list-dt               ((t (:foreground "#ea412b"))))
+	'(org-table                 ((t (:inherit fixed-pitch))) t)
+	'(org-ellipsis              ((t (:foreground "#51c4b5")))))
+
 (defun last-buffer ()
+  "Open the last buffer."
   (interactive)
   (switch-to-buffer nil))
 
+(defun open-init-file ()
+  "Open the init file."
+  (interactive)
+  (find-file user-init-file))
+
+(defun shell-new-window ()
+  "Open a `shell' in a new window."
+  (interactive)
+  (let ((buf (shell)))
+    (switch-to-buffer (other-buffer buf))
+    (switch-to-buffer-other-window buf)))
 
 (use-package general
   :ensure t
@@ -91,33 +171,33 @@
     ;; simple command
    "TAB" 'last-buffer
    "SPC" 'counsel-M-x
-   "o" 'counsel-recentf
+
+   "f" '(:ignore t :which-key "Files")
+   "fo" 'counsel-recentf
+   "fp" 'open-init-file
    
    ;; Display Settings
    "t" '(:ignore t :which-key "Toggles")
    "tl" 'display-line-numbers-mode
    "tw" 'toggle-truncate-lines
-   
+   "tt" 'counsel-load-theme
 
    ;; Buffers
    "b" '(:ignore t :which-key "Buffers")
    "bb" 'ivy-switch-buffer
+   "b]" 'next-buffer
+   "b[" 'previous-buffer
+   "bx" 'kill-buffer
+
+   ;; Windows
+   "w" '(:ignore t :which-key "Windows")
+   "wj" 'split-window-below
+   "wh" 'split-window-right
 
    ;; Applications
-   "a" '(:ignore t :which-key "Applications")
-   "ar" 'ranger
-   "ad" 'dired))
+   "o" '(:ignore t :which-key "Open")
+   "oe" 'eshell
+   "oE" 'eshell
+   "ot" 'treemacs))
 
-(cutom-set-variables
- ;;custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(general which-key yasnippet use-package key-chord evil-commentary counsel company base16-theme)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(setq custom-file "~/.emacs.d/custom.el")
