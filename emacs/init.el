@@ -38,7 +38,6 @@
     (menu-bar-mode -1)
   (menu-bar-mode 1))
 
-(exec-path-from-shell-initialize)
 (setq ispell-program-name "/usr/local/bin/aspell")
 
 (use-package company
@@ -79,10 +78,10 @@
   :ensure t)
 
 
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (exec-path-from-shell-initialize))
+;; (use-package exec-path-from-shell
+;;   :ensure t
+;;   :config
+;;   (exec-path-from-shell-initialize))
 
 (use-package telephone-line
   :ensure t
