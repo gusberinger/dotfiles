@@ -77,6 +77,7 @@
   :ensure t)
 
 (use-package exec-path-from-shell
+  :ensure t
   :if (eq system-type 'darwin)
   :config
   (exec-path-from-shell-initialize))
@@ -217,6 +218,6 @@
   "g" 'elint-current-buffer)
 
 (setq yas-snippet-dirs
-      '("~/dotfiles/emacs/custom-snippets"
-	"~/dotfiles/emacs/doom-snippets"))
+      '("~/dotfiles/emacs/custom-snippets"))
+	;; "~/dotfiles/emacs/doom-snippets"))
 

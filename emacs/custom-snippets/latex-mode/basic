@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: basic
+# key: basic
+# uuid: basic
+# --
+\documentclass{article}
+\usepackage{microtype}
+\usepackage{textcomp}
+\usepackage{setspace}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.5in]{geometry}
+\usepackage{biblatex-chicago}
+\usepackage{hyperref}
+
+
+\doublespacing
+\author{Gus Beringer}
+\title{A \LaTeX{} Template}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+$1
+\end{document}
