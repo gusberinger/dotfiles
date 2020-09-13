@@ -116,31 +116,6 @@
 	(buffer-face-mode))
 (add-hook 'eshell-mode-hook #'my-shell-setup)
 
-
-(custom-theme-set-faces
-	'user
-	'(variable-pitch ((t (:family "iA Writer Quattro S" :height 200 :foreground "#a5967e"))))
-	'(fixed-pitch ((t (:family "iA Writer Mono S" :height 180 ))))
-	'(flyspell-incorrect ((t (:foreground "#d3ebe9" :background "#c23127"))))
-	'(header-line ((t (:background "#1c1e1f" :height 220))))
-	'(org-document-title        ((t (:foreground "#f2f2f2" :weight bold :height 400))))
-	'(org-meta-line             ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-	'(org-document-info         ((t (:foreground "#51c4b5"))))
-	'(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-	'(org-block                 ((t (:inherit fixed-pitch))))
-	'(org-link                  ((t (:foreground "royal blue" :underline t))))
-	'(org-property-value        ((t (:inherit fixed-pitch))) t)
-	'(org-special-keyword       ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-	'(org-tag                   ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-	'(org-verbatim              ((t (:inherit (shadow fixed-pitch)))))
-	'(org-indent                ((t (:inherit (org-hide fixed-pitch)))))
-	'(org-level-1               ((t (:foreground "#ffaf69"))))
-	'(org-level-2               ((t (:foreground "#3fc6b7"))))
-	'(org-level-3               ((t (:foreground "#dc4d59"))))
-	'(org-list-dt               ((t (:foreground "#ea412b"))))
-	'(org-table                 ((t (:inherit fixed-pitch))) t)
-	'(org-ellipsis              ((t (:foreground "#51c4b5")))))
-
 (defun last-buffer ()
   "Open the last buffer."
   (interactive)
