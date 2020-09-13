@@ -11,7 +11,6 @@
       ispell-program-name "/usr/local/bin/aspell"
       backup-directory-alist `(("." . "~/.saves"))
       custom-file "~/.emacs.d/custom.el")
-(load-file "~/.emacs.d/theme.el")
 
 (use-package evil
   :ensure t
@@ -32,15 +31,15 @@
   (evil-commentary-mode))
 
 (use-package base16-theme
-  :ensure t)
-  ;; (load-theme 'base16-solarized-light t))
+  :ensure t
+  :config
+  (load-theme 'base16-solarized-light t))
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (if nil (string-equal system-type "darwin")
     (menu-bar-mode -1)
   (menu-bar-mode 1))
-
 
 (use-package company
   :ensure t
@@ -172,7 +171,7 @@
   :ensure t)
 
 (use-package evil-magit
-  :after '(evil magit)
+  :after magit
   :ensure t)
 
 (use-package general
@@ -217,7 +216,7 @@
   "wn" 'make-frame-command
 
   ;; Magit
-  "gs" 'magit-status
+  "gg" 'magit-status
   
   ;; Applications
   "o" '(:ignore t :which-key "Open")
