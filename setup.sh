@@ -1,1 +1,1 @@
-ln -sv emacs/init.el ~/.emacs.d
+ln -sv ~/dotfiles/emacs/init.el ~/.emacs.d/
