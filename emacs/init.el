@@ -206,6 +206,7 @@
   "w" '(:ignore t :which-key "Windows")
   "wj" 'split-window-below
   "wh" 'split-window-right
+  "wn" 'make-frame-command
   
   ;; Applications
   "o" '(:ignore t :which-key "Open")
