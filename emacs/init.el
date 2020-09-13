@@ -7,7 +7,11 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(setq vc-follow-symlinks t)
+(setq vc-follow-symlinks t
+      ispell-program-name "/usr/local/bin/aspell"
+      backup-directory-alist `(("." . "~/.saves"))
+      custom-file "~/.emacs.d/custom.el")
+
 
 (use-package evil
   :ensure t
@@ -38,8 +42,6 @@
     (menu-bar-mode -1)
   (menu-bar-mode 1))
 
-(exec-path-from-shell-initialize)
-(setq ispell-program-name "/usr/local/bin/aspell")
 
 (use-package company
   :ensure t
@@ -71,16 +73,11 @@
   :config
   (which-key-mode 1))
 
-(use-package doom-snippets
-  :load-path "~/.emacs.d/doom-snippets"
-  :after yasnippet)
-
 (use-package treemacs
   :ensure t)
 
-
 (use-package exec-path-from-shell
-  :ensure t
+  :if (eq system-type 'darwin)
   :config
   (exec-path-from-shell-initialize))
 
@@ -218,7 +215,8 @@
 (my-local-leader-def '(normal emacs) emacs-lisp-mode-map
   "c" 'eval-buffer
   "g" 'elint-current-buffer)
-  
 
+(setq yas-snippet-dirs
+      '("~/dotfiles/emacs/custom-snippets"
+	"~/dotfiles/emacs/doom-snippets"))
 
-(setq custom-file "~/.emacs.d/custom.el")
