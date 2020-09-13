@@ -1,6 +1,0 @@
-# Vim files
-.vim/Plugged
-.vim/.netrwhist
-.vim/.netrwbook
-.DS_Store
-*.swp
