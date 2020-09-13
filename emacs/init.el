@@ -11,7 +11,7 @@
       ispell-program-name "/usr/local/bin/aspell"
       backup-directory-alist `(("." . "~/.saves"))
       custom-file "~/.emacs.d/custom.el")
-
+(load-file "~/.emacs.d/theme.el")
 
 (use-package evil
   :ensure t
@@ -32,9 +32,8 @@
   (evil-commentary-mode))
 
 (use-package base16-theme
-  :ensure t
-  :config
-  (load-theme 'base16-solarized-light t))
+  :ensure t)
+  ;; (load-theme 'base16-solarized-light t))
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -66,6 +65,8 @@
 (use-package yasnippet
   :ensure t
   :config
+  (setq yas-snippet-dirs
+	'("~/dotfiles/emacs/custom-snippets"))
   (yas-global-mode 1))
 
 (use-package which-key
@@ -167,6 +168,13 @@
   :config
   (auctex-latexmk-setup))
 
+(use-package magit
+  :ensure t)
+
+(use-package evil-magit
+  :after '(evil magit)
+  :ensure t)
+
 (use-package general
   :ensure t)
 
@@ -207,6 +215,9 @@
   "wj" 'split-window-below
   "wh" 'split-window-right
   "wn" 'make-frame-command
+
+  ;; Magit
+  "gs" 'magit-status
   
   ;; Applications
   "o" '(:ignore t :which-key "Open")
@@ -217,8 +228,3 @@
 (my-local-leader-def '(normal emacs) emacs-lisp-mode-map
   "c" 'eval-buffer
   "g" 'elint-current-buffer)
-
-(setq yas-snippet-dirs
-      '("~/dotfiles/emacs/custom-snippets"))
-	;; "~/dotfiles/emacs/doom-snippets"))
-
