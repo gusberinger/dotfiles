@@ -38,6 +38,7 @@
     (menu-bar-mode -1)
   (menu-bar-mode 1))
 
+(exec-path-from-shell-initialize)
 (setq ispell-program-name "/usr/local/bin/aspell")
 
 (use-package company
@@ -78,10 +79,10 @@
   :ensure t)
 
 
-;; (use-package exec-path-from-shell
-;;   :ensure t
-;;   :config
-;;   (exec-path-from-shell-initialize))
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 
 (use-package telephone-line
   :ensure t
@@ -159,44 +160,65 @@
     (switch-to-buffer (other-buffer buf))
     (switch-to-buffer-other-window buf)))
 
-(use-package general
+(use-package company-auctex
+  :ensure t
+  :after company)
+
+(use-package auctex-latexmk
   :ensure t
   :config
-  (general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
+  (auctex-latexmk-setup))
 
-    ;; simple command
-   "TAB" 'last-buffer
-   "SPC" 'counsel-M-x
+(use-package general
+  :ensure t)
 
-   "f" '(:ignore t :which-key "Files")
-   "fo" 'counsel-recentf
-   "fp" 'open-init-file
-   
+(general-create-definer my-leader-def
+  :prefix "SPC")
+
+(general-create-definer my-local-leader-def
+  :prefix "SPC m")
+
+(my-leader-def '(normal emacs)
+  "TAB" 'last-buffer
+  "SPC" 'counsel-M-x
+  "a" 'org-agenda
+  "u" 'counsel-bookmark
+  "c" 'org-capture
+
+  ;; Files
+  "f" '(:ignore t :which-key "Files")
+  "fo" 'counsel-recentf
+  "fp" 'open-init-file
+
    ;; Display Settings
-   "t" '(:ignore t :which-key "Toggles")
-   "tl" 'display-line-numbers-mode
-   "tw" 'toggle-truncate-lines
-   "tt" 'counsel-load-theme
+  "t" '(:ignore t :which-key "Toggles")
+  "tl" 'display-line-numbers-mode
+  "tw" 'toggle-truncate-lines
+  "tt" 'counsel-load-theme
+  "tv" 'variable-pitch-mode
 
-   ;; Buffers
-   "b" '(:ignore t :which-key "Buffers")
-   "bb" 'ivy-switch-buffer
-   "b]" 'next-buffer
-   "b[" 'previous-buffer
-   "bx" 'kill-buffer
+  ;; Buffers
+  "b" '(:ignore t :which-key "Buffers")
+  "bb" 'ivy-switch-buffer
+  "b]" 'next-buffer
+  "b[" 'previous-buffer
+  "bx" 'kill-buffer
 
-   ;; Windows
-   "w" '(:ignore t :which-key "Windows")
-   "wj" 'split-window-below
-   "wh" 'split-window-right
+  ;; Windows
+  "w" '(:ignore t :which-key "Windows")
+  "wj" 'split-window-below
+  "wh" 'split-window-right
+  
+  ;; Applications
+  "o" '(:ignore t :which-key "Open")
+  "oe" 'eshell
+  "oE" 'eshell
+  "ot" 'treemacs)
 
-   ;; Applications
-   "o" '(:ignore t :which-key "Open")
-   "oe" 'eshell
-   "oE" 'eshell
-   "ot" 'treemacs))
+(my-local-leader-def '(normal emacs) emacs-lisp-mode-map
+  "c" 'eval-buffer
+  "g" 'elint-current-buffer)
+  
+
 
 (setq custom-file "~/.emacs.d/custom.el")
