@@ -15,6 +15,7 @@
       recentf-max-menu-items 25
       recentf-max-saved-items 25)
 
+(advice-add #'yes-or-no-p :override #'y-or-n-p)
 (recentf-mode 1)
 (global-visual-line-mode 1)
 (tool-bar-mode -1)
@@ -146,6 +147,16 @@
   :config
   (auctex-latexmk-setup))
 
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(defun LaTeX-build ()
+  (interactive)
+  (progn
+    (let ((TeX-save-query nil))
+      (TeX-save-document (TeX-master-file)))
+    (TeX-command latex-build-command 'TeX-master-file -1)))
+
+(setq debug-on-error t)
+
 (defvar latex-build-command (if (executable-find "latexmk") "LatexMk" "LaTeX"))
 (defvar latex-enable-auto-fill t)
 (defvar latex-enable-folding nil)
@@ -157,7 +168,8 @@
                            "tikzpicture"))
 
 (setq TeX-PDF-mode t
-      auctex-latexmk-inherit-TeX-PDF-mode t)
+      auctex-latexmk-inherit-TeX-PDF-mode t
+      reftex-plug-into-AUCTeX t)
 ;; LaTeX
 ;; (setq TeX-command-default latex-build-command
 ;;       TeX-command-default latex-build-command
@@ -218,5 +230,19 @@
   "g" 'elint-current-buffer)
 
 (my-local-leader-def '(normal emacs) LaTeX-mode-map
-  "a" 'TeX-command-run-all)
-  ;; "b" 'latex/build)
+  "a" 'TeX-command-run-all
+  "b" 'LaTeX-build
+
+  "rc"    'reftex-citation
+  "rg"    'reftex-grep-document
+  "ri"    'reftex-index-selection-or-word
+  "rI"    'reftex-display-index
+  "r TAB" 'reftex-index
+  "rl"    'reftex-label
+  "rp"    'reftex-index-phrase-selection-or-word
+  "rP"    'reftex-index-visit-phrases-buffer
+  "rr"    'reftex-reference
+  "rs"    'reftex-search-document
+  "rt"    'reftex-toc
+  "rT"    'reftex-toc-recenter
+  "rv"    'reftex-view-crossref)
