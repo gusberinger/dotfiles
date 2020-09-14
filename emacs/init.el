@@ -131,6 +131,13 @@
     (switch-to-buffer (other-buffer buf))
     (switch-to-buffer-other-window buf)))
 
+(use-package magit
+  :ensure t)
+
+(use-package evil-magit
+  :after magit
+  :ensure t)
+
 (use-package company-auctex
   :ensure t
   :after company)
@@ -140,12 +147,22 @@
   :config
   (auctex-latexmk-setup))
 
-(use-package magit
-  :ensure t)
+(defvar latex-build-command (if (executable-find "latexmk") "LatexMk" "LaTeX"))
+(defvar latex-enable-auto-fill t)
+(defvar latex-enable-folding nil)
+(defvar latex-nofill-env '("equation"
+                           "equation*"
+                           "align"
+                           "align*"
+                           "tabular"
+                           "tikzpicture"))
 
-(use-package evil-magit
-  :after magit
-  :ensure t)
+(setq TeX-PDF-mode t
+      auctex-latexmk-inherit-TeX-PDF-mode t)
+;; LaTeX
+;; (setq TeX-command-default latex-build-command
+;;       TeX-command-default latex-build-command
+;;       TeX-auto-save t)
 
 ;; LaTeX Settings
 
@@ -191,14 +208,18 @@
   "wn" 'make-frame-command
 
   ;; Magit
+  "g" '(:ignore t :which-key "Magit")
   "gg" 'magit-status
   
   ;; Applications
   "o" '(:ignore t :which-key "Open")
   "oe" 'eshell
-  "oE" 'eshell
   "ot" 'treemacs)
 
 (my-local-leader-def '(normal emacs) emacs-lisp-mode-map
   "c" 'eval-buffer
   "g" 'elint-current-buffer)
+
+(my-local-leader-def '(normal emacs) LaTeX-mode-map
+  "a" 'TeX-command-run-all)
+  ;; "b" 'latex/build)
