@@ -13,7 +13,8 @@
       custom-file "~/.emacs.d/custom.el"
       org-src-tab-acts-natively t
       recentf-max-menu-items 25
-      recentf-max-saved-items 25)
+      recentf-max-saved-items 25
+      user-full-name "Gus Beringer")
 
 (recentf-mode 1)
 (global-visual-line-mode 1)
@@ -145,6 +146,8 @@
 (use-package evil-magit
   :after magit
   :ensure t)
+
+;; LaTeX Settings
 
 (use-package general
   :ensure t)

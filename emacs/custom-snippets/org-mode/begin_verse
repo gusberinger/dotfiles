@@ -3,4 +3,6 @@
 # key: <v
 # type: command
 # --
-(doom-snippets-expand :uuid "verse")
+#+BEGIN_VERSE
+$1
+#+END_VERSE

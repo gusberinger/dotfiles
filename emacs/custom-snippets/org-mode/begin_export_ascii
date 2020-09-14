@@ -4,5 +4,5 @@
 # uuid: <a
 # --
 #+BEGIN_EXPORT ascii
-`%`$0
+$1
 #+END_EXPORT
