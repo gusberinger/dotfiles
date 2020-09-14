@@ -10,7 +10,18 @@
 (setq vc-follow-symlinks t
       ispell-program-name "/usr/local/bin/aspell"
       backup-directory-alist `(("." . "~/.saves"))
-      custom-file "~/.emacs.d/custom.el")
+      custom-file "~/.emacs.d/custom.el"
+      org-src-tab-acts-natively t
+      recentf-max-menu-items 25
+      recentf-max-saved-items 25)
+
+(recentf-mode 1)
+(global-visual-line-mode 1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(if nil (string-equal system-type "darwin")
+    (menu-bar-mode -1)
+  (menu-bar-mode 1))
 
 (use-package evil
   :ensure t
@@ -35,11 +46,6 @@
   :config
   (load-theme 'base16-solarized-light t))
 
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(if nil (string-equal system-type "darwin")
-    (menu-bar-mode -1)
-  (menu-bar-mode 1))
 
 (use-package company
   :ensure t
@@ -95,15 +101,6 @@
   (face-remap-add-relative 'variable-pitch :family "Liberation Serif"
                                            :height 1.0))
 (add-hook 'nov-mode-hook 'my-nov-font-setup)
-
-
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(setq recentf-max-saved-items 25)
-
-
-;; Buffer Settings
-(global-visual-line-mode 1)
 
 (with-eval-after-load "ispell"
 	(setq ispell-program-name "aspell")
