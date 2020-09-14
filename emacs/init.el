@@ -10,6 +10,7 @@
 (setq vc-follow-symlinks t
       ispell-program-name "/usr/local/bin/aspell"
       backup-directory-alist `(("." . "~/.saves"))
+      create-lockfiles nil
       custom-file "~/.emacs.d/custom.el"
       org-src-tab-acts-natively t
       recentf-max-menu-items 25
@@ -171,12 +172,7 @@
 (setq TeX-PDF-mode t
       auctex-latexmk-inherit-TeX-PDF-mode t
       reftex-plug-into-AUCTeX t)
-;; LaTeX
-;; (setq TeX-command-default latex-build-command
-;;       TeX-command-default latex-build-command
-;;       TeX-auto-save t)
 
-;; LaTeX Settings
 
 (use-package general
   :ensure t)
@@ -215,8 +211,8 @@
 
   ;; Windows
   "w" '(:ignore t :which-key "Windows")
-  "wj" 'split-window-below
-  "wh" 'split-window-right
+  ;; "wj" 'split-window-below
+  ;; "wh" 'split-window-right
   "wn" 'make-frame-command
 
   ;; Magit
@@ -235,7 +231,9 @@
 (my-local-leader-def '(normal emacs) LaTeX-mode-map
   "a" 'TeX-command-run-all
   "b" 'LaTeX-build
+  "c"    'reftex-citation
 
+  "r" '(:ignore t :which-key "Reftex")
   "rc"    'reftex-citation
   "rg"    'reftex-grep-document
   "ri"    'reftex-index-selection-or-word
