@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: #+BEGIN_SRC ... block
 # key: <s
+# uuid: <s
 # --
 #+BEGIN_SRC $1
 $2

@@ -4,5 +4,5 @@
 # uuid: <h
 # --
 #+BEGIN_EXPORT html
-`%`$0
+$0
 #+END_EXPORT

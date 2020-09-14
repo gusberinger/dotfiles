@@ -4,5 +4,5 @@
 # uuid: <l
 # --
 #+BEGIN_EXPORT latex
-`%`$0
+$0
 #+END_EXPORT
