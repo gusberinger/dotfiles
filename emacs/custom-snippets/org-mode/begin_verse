@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: #+BEGIN_VERSE block
 # key: <v
-# type: command
 # --
 #+BEGIN_VERSE
 $1
