@@ -13,7 +13,8 @@
       custom-file "~/.emacs.d/custom.el"
       org-src-tab-acts-natively t
       recentf-max-menu-items 25
-      recentf-max-saved-items 25)
+      recentf-max-saved-items 25
+      user-full-name "Gus Beringer")
 
 (advice-add #'yes-or-no-p :override #'y-or-n-p)
 (recentf-mode 1)
@@ -174,6 +175,8 @@
 ;; (setq TeX-command-default latex-build-command
 ;;       TeX-command-default latex-build-command
 ;;       TeX-auto-save t)
+
+;; LaTeX Settings
 
 (use-package general
   :ensure t)

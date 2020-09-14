@@ -4,5 +4,5 @@
 # uuid: <e
 # --
 #+BEGIN_EXAMPLE
-`%`$0
+$1
 #+END_EXAMPLE

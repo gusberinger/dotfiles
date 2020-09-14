@@ -4,5 +4,5 @@
 # uuid: <c
 # --
 #+BEGIN_COMMENT
-`%`$0
+$1
 #+END_COMMENT
