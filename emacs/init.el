@@ -13,6 +13,8 @@
       create-lockfiles nil
       custom-file "~/.emacs.d/custom.el"
       org-src-tab-acts-natively t
+      org-src-preserve-indentation nil 
+      org-edit-src-content-indentation 0
       recentf-max-menu-items 25
       recentf-max-saved-items 25
       user-full-name "Gus Beringer")
@@ -105,6 +107,14 @@
   :config
   (telephone-line-mode 1))
 
+(use-package deft
+  :ensure t
+  :config
+  (setq deft-extensions '("txt" "tex" "org")
+	deft-directory "~/Dropbox/org"
+	deft-recursive t))
+	
+
 (use-package org-bullets
   :ensure t
   :config
@@ -133,11 +143,11 @@
    `(org-level-7 ((t (,@headline ,@variable-tuple))))
    `(org-level-6 ((t (,@headline ,@variable-tuple))))
    `(org-level-5 ((t (,@headline ,@variable-tuple))))
-   `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
-   `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
-   `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
-   `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
-   `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+   `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.05))))
+   `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.1))))
+   `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.25))))
+   `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.5))))
+   `(org-document-title ((t (,@headline ,@variable-tuple :height 1.75 :underline t))))))
 
 (use-package nov
   :ensure t
@@ -237,6 +247,7 @@
   "a" 'org-agenda
   "u" 'counsel-bookmark
   "c" 'org-capture
+  "n" 'deft
 
   ;; Files
   "f" '(:ignore t :which-key "Files")
@@ -266,7 +277,11 @@
   ;; Magit
   "g" '(:ignore t :which-key "Magit")
   "gg" 'magit-status
-  
+  "gc" 'magit-commit
+  "gf" 'magit-fetch
+  "gF" 'magit-pull
+  "gs" 'magit-stage
+
   ;; Applications
   "o" '(:ignore t :which-key "Open")
   "oe" 'eshell
@@ -276,10 +291,13 @@
   "c" 'eval-buffer
   "g" 'elint-current-buffer)
 
+(my-local-leader-def '(normal emacs) org-mode-map
+  "s" 'org-edit-special)
+
 (my-local-leader-def '(normal emacs) LaTeX-mode-map
   "a" 'TeX-command-run-all
   "b" 'LaTeX-build
-  "c"    'reftex-citation
+  "c" 'reftex-citation
 
   "r" '(:ignore t :which-key "Reftex")
   "rc"    'reftex-citation
