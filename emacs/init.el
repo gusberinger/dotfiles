@@ -12,9 +12,6 @@
       backup-directory-alist `(("." . "~/.saves"))
       create-lockfiles nil
       custom-file "~/.emacs.d/custom.el"
-      org-src-tab-acts-natively t
-      org-src-preserve-indentation nil 
-      org-edit-src-content-indentation 0
       recentf-max-menu-items 25
       recentf-max-saved-items 25
       user-full-name "Gus Beringer")
@@ -127,7 +124,13 @@
   :hook
   (text-mode . mixed-pitch-mode))
 
-(setq org-hide-emphasis-markers t)
+; code highliting in exported src blocks
+(use-package htmlize
+  :ensure t)
+
+(setq org-hide-emphasis-markers t
+      org-html-htmlize-output-type 'css
+      org-src-fontify-natively t)
 
 
 (font-lock-add-keywords 'org-mode
@@ -237,7 +240,6 @@
 (setq TeX-PDF-mode t
       auctex-latexmk-inherit-TeX-PDF-mode t
       reftex-plug-into-AUCTeX t)
-
 
 (use-package general
   :ensure t)
