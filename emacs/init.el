@@ -28,6 +28,7 @@
     (menu-bar-mode -1)
   (menu-bar-mode 1))
 
+;; from doom
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message user-login-name
       inhibit-default-init t
@@ -110,14 +111,21 @@
   :ensure t
   :config
   (setq deft-extensions '("txt" "tex" "org")
-	deft-directory "~/Dropbox/org"
+	deft-directory "~/Dropbox/notes"
 	deft-recursive t))
-	
+
+(use-package ess
+  :ensure t)
 
 (use-package org-bullets
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+(use-package mixed-pitch
+  :ensure t
+  :hook
+  (text-mode . mixed-pitch-mode))
 
 (setq org-hide-emphasis-markers t)
 
@@ -125,7 +133,7 @@
 (font-lock-add-keywords 'org-mode
                         '(("^ *\\([-]\\) "
                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-(add-hook 'org-mode-hook 'variable-pitch-mode)
+;; (add-hook 'org-mode-hook 'variable-pitch-mode)
 (let* ((variable-tuple
         (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
               ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
