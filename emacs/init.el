@@ -60,7 +60,6 @@
   :config
   (load-theme 'base16-solarized-light t))
 
-
 (use-package company
   :ensure t
   :config
@@ -267,12 +266,19 @@
   "b]" 'next-buffer
   "b[" 'previous-buffer
   "bx" 'kill-buffer
+  "bd" 'evil-window-delete
 
   ;; Windows
-  "w" '(:ignore t :which-key "Windows")
-  ;; "wj" 'split-window-below
-  ;; "wh" 'split-window-right
+  "w" '(:ignore t :which-key "Workspace")
   "wn" 'make-frame-command
+  "wh" 'evil-window-left
+  "wj" 'evil-window-down
+  "wk" 'evil-window-up
+  "wl" 'evil-window-right
+  "wK" 'evil-window-split
+  "wJ" 'evil-window-split
+  "wH" 'evil-window-vsplit
+  "wL" 'evil-window-vsplit
 
   ;; Magit
   "g" '(:ignore t :which-key "Magit")
