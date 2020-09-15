@@ -1,0 +1,2 @@
+(setq org-gcal-client-id "client-id"
+      org-gcal-client-secret "client-secret")
