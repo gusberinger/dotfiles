@@ -110,6 +110,7 @@
 (use-package ess
   :ensure t)
 
+;; Org Settings
 (use-package deft
   :ensure t
   :config
@@ -117,8 +118,8 @@
 	deft-directory "~/Dropbox/notes"
 	deft-recursive t))
 
-;; Org Settings
 (add-hook 'org-mode-hook 'org-indent-mode)
+
 (use-package org-bullets
   :ensure t
   :config
@@ -328,6 +329,11 @@
   "gf" 'magit-fetch
   "gF" 'magit-pull
   "gs" 'magit-stage
+
+  ;; Documentation
+  "h" '(:ignore t :which-key "Help")
+  "hv" 'describe-variable
+  "ho" 'describe-symbol
 
   ;; Applications
   "o" '(:ignore t :which-key "Open")
