@@ -7,6 +7,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; Emacs Settings
 (setq vc-follow-symlinks t
       ispell-program-name "/usr/local/bin/aspell"
       backup-directory-alist `(("." . "~/.saves"))
@@ -16,16 +17,17 @@
       recentf-max-saved-items 25
       user-full-name "Gus Beringer")
 
-(advice-add #'yes-or-no-p :override #'y-or-n-p)
 (recentf-mode 1)
-(global-visual-line-mode 1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(if nil (string-equal system-type "darwin")
-    (menu-bar-mode -1)
-  (menu-bar-mode 1))
+(advice-add #'yes-or-no-p :override #'y-or-n-p)
 
-;; from doom
+;; Fix macOS Path Issues
+(use-package exec-path-from-shell
+  :ensure t
+  :if (eq system-type 'darwin)
+  :config
+  (exec-path-from-shell-initialize))
+
+;; Supress Startup Message
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message user-login-name
       inhibit-default-init t
@@ -35,6 +37,7 @@
       initial-major-mode 'fundamental-mode
       initial-scratch-message nil)
 
+;; Evil Settings
 (use-package evil
   :ensure t
   :config
@@ -53,11 +56,23 @@
   :config
   (evil-commentary-mode))
 
+;; Theme Settings
+(global-visual-line-mode 1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(if nil (string-equal system-type "darwin")
+    (menu-bar-mode -1)
+  (menu-bar-mode 1))
+
 (use-package base16-theme
   :ensure t
   :config
   (load-theme 'base16-solarized-light t))
 
+(use-package treemacs
+  :ensure t)
+
+;; Auto-completion and Counsel
 (use-package company
   :ensure t
   :config
@@ -78,6 +93,7 @@
 (use-package swiper
   :ensure t)
 
+;; Snippets
 (use-package yasnippet
   :ensure t
   :config
@@ -85,24 +101,13 @@
 	'("~/dotfiles/emacs/custom-snippets"))
   (yas-global-mode 1))
 
-(use-package which-key
-  :ensure t
-  :config
-  (which-key-mode 1))
-
-(use-package treemacs
-  :ensure t)
-
-(use-package exec-path-from-shell
-  :ensure t
-  :if (eq system-type 'darwin)
-  :config
-  (exec-path-from-shell-initialize))
-
 (use-package telephone-line
   :ensure t
   :config
   (telephone-line-mode 1))
+
+(use-package ess
+  :ensure t)
 
 (use-package deft
   :ensure t
@@ -111,9 +116,8 @@
 	deft-directory "~/Dropbox/notes"
 	deft-recursive t))
 
-(use-package ess
-  :ensure t)
-
+;; Org Settings
+(add-hook 'org-mode-hook 'org-indent-mode)
 (use-package org-bullets
   :ensure t
   :config
@@ -124,7 +128,7 @@
   :hook
   (text-mode . mixed-pitch-mode))
 
-; code highliting in exported src blocks
+; code highliting in html exported src blocks
 (use-package htmlize
   :ensure t)
 
@@ -179,6 +183,7 @@
   ;;  `(org-level-1 ((t (,@headline ,@variable-tuple))))
   ;;  `(org-document-title ((t (,@headline ,@variable-tuple :underline t))))))
 
+;; Epub Settings
 (use-package nov
   :ensure t
   :config
@@ -188,11 +193,55 @@
                                            ;; :height 1.0))
 (add-hook 'nov-mode-hook 'my-nov-font-setup)
 
+;; Spellcheck
 (with-eval-after-load "ispell"
 	(setq ispell-program-name "aspell")
 	(ispell-set-spellchecker-params)
 	(setq ispell-dictionary "en_US"))
 
+;; Git Settings
+(use-package magit
+  :ensure t)
+
+(use-package evil-magit
+  :after magit
+  :ensure t)
+
+(use-package git-gutter
+  :ensure t
+  :config
+  (global-git-gutter-mode 1))
+
+;; Latex Settings
+(use-package company-auctex
+  :ensure t
+  :after company)
+
+(use-package auctex-latexmk
+  :ensure t
+  :config
+  (auctex-latexmk-setup))
+
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq TeX-PDF-mode t
+      auctex-latexmk-inherit-TeX-PDF-mode t
+      reftex-plug-into-AUCTeX t)
+(defun LaTeX-build ()
+  (interactive)
+  (progn
+    (let ((TeX-save-query nil))
+      (TeX-save-document (TeX-master-file)))
+    (TeX-command latex-build-command 'TeX-master-file -1)))
+
+(defvar latex-build-command (if (executable-find "latexmk") "LatexMk" "LaTeX"))
+(defvar latex-nofill-env '("equation"
+                           "equation*"
+                           "align"
+                           "align*"
+                           "tabular"
+                           "tikzpicture"))
+
+;; Functions for Keybindings
 (defun my-shell-setup ()
 	(interactive)
 	(setq buffer-face-mode-face '(:family "Hack Nerd Font" :height 160))
@@ -216,50 +265,11 @@
     (switch-to-buffer (other-buffer buf))
     (switch-to-buffer-other-window buf)))
 
-(use-package magit
-  :ensure t)
-
-(use-package evil-magit
-  :after magit
-  :ensure t)
-
-(use-package git-gutter
+;; Keybindings
+(use-package which-key
   :ensure t
   :config
-  (global-git-gutter-mode 1))
-
-(use-package company-auctex
-  :ensure t
-  :after company)
-
-(use-package auctex-latexmk
-  :ensure t
-  :config
-  (auctex-latexmk-setup))
-
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(defun LaTeX-build ()
-  (interactive)
-  (progn
-    (let ((TeX-save-query nil))
-      (TeX-save-document (TeX-master-file)))
-    (TeX-command latex-build-command 'TeX-master-file -1)))
-
-(setq debug-on-error t)
-
-(defvar latex-build-command (if (executable-find "latexmk") "LatexMk" "LaTeX"))
-(defvar latex-enable-auto-fill t)
-(defvar latex-enable-folding nil)
-(defvar latex-nofill-env '("equation"
-                           "equation*"
-                           "align"
-                           "align*"
-                           "tabular"
-                           "tikzpicture"))
-
-(setq TeX-PDF-mode t
-      auctex-latexmk-inherit-TeX-PDF-mode t
-      reftex-plug-into-AUCTeX t)
+  (which-key-mode 1))
 
 (use-package general
   :ensure t)
