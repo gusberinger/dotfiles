@@ -72,6 +72,11 @@
 (use-package treemacs
   :ensure t)
 
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
+
 ;; Auto-completion and Counsel
 (use-package company
   :ensure t
@@ -101,10 +106,6 @@
 	'("~/dotfiles/emacs/custom-snippets"))
   (yas-global-mode 1))
 
-(use-package telephone-line
-  :ensure t
-  :config
-  (telephone-line-mode 1))
 
 (use-package ess
   :ensure t)
