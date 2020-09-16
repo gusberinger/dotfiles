@@ -132,40 +132,60 @@
       org-html-htmlize-output-type 'css
       org-src-fontify-natively t)
 
+(use-package org-gcal
+  :ensure t
+  :config
+  (load-file "~/Dropbox/emacs/org-gcal-config.el")
+  (setq org-gcal-file-alist '(("berin013@umn.edu" .  "~/Dropbox/notes/gcal.org"))))
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync)))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync)))
+(setq org-hide-emphasis-markers t)
 
+(use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+; swap - with •
 (font-lock-add-keywords 'org-mode
                         '(("^ *\\([-]\\) "
                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-;; (add-hook 'org-mode-hook 'variable-pitch-mode)
-(let* ((variable-tuple
-        (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
-              ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-              ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-              ((x-list-fonts "Verdana")         '(:font "Verdana"))
-              ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-              (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-       (base-font-color     (face-foreground 'default nil 'default))
-       (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
 
-  (custom-theme-set-faces
-   'user
-   `(org-level-8 ((t (,@headline ,@variable-tuple))))
-   `(org-level-7 ((t (,@headline ,@variable-tuple))))
-   `(org-level-6 ((t (,@headline ,@variable-tuple))))
-   `(org-level-5 ((t (,@headline ,@variable-tuple))))
-   `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.05))))
-   `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.1))))
-   `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.25))))
-   `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.5))))
-   `(org-document-title ((t (,@headline ,@variable-tuple :height 1.75 :underline t))))))
+;; (let* ((variable-tuple
+;;         (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
+;;               ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+;;               ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+;;               ((x-list-fonts "Verdana")         '(:font "Verdana"))
+;;               ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+;;               (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+;;        (base-font-color     (face-foreground 'default nil 'default))
+;;        (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+
+  ;; (custom-theme-set-faces
+  ;;  'user
+  ;;  `(org-level-8 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-7 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-6 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-5 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-4 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-3 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-2 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-1 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-document-title ((t (,@headline ,@variable-tuple :underline t))))))
 
 (use-package nov
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 (defun my-nov-font-setup ()
-  (face-remap-add-relative 'variable-pitch :family "Liberation Serif"
-                                           :height 1.0))
+  (face-remap-add-relative 'variable-pitch :family "Liberation Serif"))
+                                           ;; :height 1.0))
 (add-hook 'nov-mode-hook 'my-nov-font-setup)
 
 (with-eval-after-load "ispell"
