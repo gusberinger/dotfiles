@@ -318,6 +318,8 @@
   "gf" 'magit-fetch
   "gF" 'magit-pull
   "gs" 'magit-stage
+  "gp" 'magit-push
+  "gd" 'magit-diff
 
   ;; Documentation
   "h" '(:ignore t :which-key "Help")
