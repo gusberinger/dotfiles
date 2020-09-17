@@ -40,10 +40,19 @@
 ;; Evil Settings
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-integration t
+  evil-want-keybinding nil)
   :config
   (evil-mode 1)
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 (use-package key-chord
   :ensure t
@@ -77,6 +86,13 @@
   :config
   (telephone-line-mode 1))
 
+(setq-default prettify-symbols-alist '(("#+BEGIN_SRC" . "λ")
+                                       ("#+END_SRC" . "λ")
+                                       ("#+begin_src" . "λ")
+                                       ("#+end_src" . "λ")
+                                       (">=" . "≥")
+                                       ("=>" . "⇨")))
+
 ;; Auto-completion and Counsel
 (use-package company
   :ensure t
@@ -106,12 +122,14 @@
 	'("~/dotfiles/emacs/custom-snippets"))
   (yas-global-mode 1))
 
-
+;; Statistics
 (use-package ess
   :ensure t)
 
 ;; Org Settings
 (add-hook 'org-mode-hook 'org-indent-mode)
+(add-hook 'org-mode-hook 'prettify-symbols-mode)
+;; (add-hook 'prettify-symbols-mode (lambda () (setq-local org-hide-leading-stars nil)))
 (use-package deft
   :ensure t
   :config
@@ -120,15 +138,14 @@
 	deft-recursive t))
 
 (use-package org-superstar
+  :hook
+  (org-mode . org-superstar-mode)
   :ensure t
   :config
-  (setq org-superstar-headline-bullets-list '(" " "⁖" "◉" "○" "✸" "✿"))
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
-
-;; (use-package org-bullets
-;;   :ensure t
-;;   :config
-;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (setq org-superstar-leading-bullet ?\s
+	org-superstar-leading-fallback ?\s
+	org-superstar-item-bullet-alist "•"))
+	;; org-hide-leading-stars nil))
 
 (use-package mixed-pitch
   :ensure t
@@ -152,44 +169,6 @@
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync)))
 (setq org-hide-emphasis-markers t)
 
-(use-package evil-org
-  :ensure t
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
-
-; swap - with •
-(font-lock-add-keywords 'org-mode
-                        '(("^ *\\([-]\\) "
-                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
-;; (let* ((variable-tuple
-;;         (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
-;;               ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-;;               ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-;;               ((x-list-fonts "Verdana")         '(:font "Verdana"))
-;;               ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-;;               (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-;;        (base-font-color     (face-foreground 'default nil 'default))
-;;        (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
-
-  ;; (custom-theme-set-faces
-  ;;  'user
-  ;;  `(org-level-8 ((t (,@headline ,@variable-tuple))))
-  ;;  `(org-level-7 ((t (,@headline ,@variable-tuple))))
-  ;;  `(org-level-6 ((t (,@headline ,@variable-tuple))))
-  ;;  `(org-level-5 ((t (,@headline ,@variable-tuple))))
-  ;;  `(org-level-4 ((t (,@headline ,@variable-tuple))))
-  ;;  `(org-level-3 ((t (,@headline ,@variable-tuple))))
-  ;;  `(org-level-2 ((t (,@headline ,@variable-tuple))))
-  ;;  `(org-level-1 ((t (,@headline ,@variable-tuple))))
-  ;;  `(org-document-title ((t (,@headline ,@variable-tuple :underline t))))))
-
 ;; Epub Settings
 (use-package nov
   :ensure t
@@ -208,10 +187,6 @@
 
 ;; Git Settings
 (use-package magit
-  :ensure t)
-
-(use-package evil-magit
-  :after magit
   :ensure t)
 
 (use-package git-gutter
@@ -247,6 +222,15 @@
                            "align*"
                            "tabular"
                            "tikzpicture"))
+
+;; PDF Tools
+(use-package pdf-tools
+  :ensure t
+  :config
+  (custom-set-variables
+    '(pdf-tools-handle-upgrades nil)) ; Use brew upgrade pdf-tools instead.
+  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo"))
+(pdf-tools-install)
 
 ;; Functions for Keybindings
 (defun my-shell-setup ()
