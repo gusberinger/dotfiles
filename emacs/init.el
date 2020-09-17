@@ -190,9 +190,12 @@
   :ensure t)
 
 (use-package git-gutter
+  :after magit
   :ensure t
   :config
-  (global-git-gutter-mode 1))
+  (global-git-gutter-mode 1)
+  :hook
+  (magit-post-refresh . #'git-gutter:update-all-windows))
 
 ;; Latex Settings
 (use-package company-auctex
@@ -317,7 +320,8 @@
   "gc" 'magit-commit
   "gf" 'magit-fetch
   "gF" 'magit-pull
-  "gs" 'magit-stage
+  "gs" 'magit-stage-file
+  "gu" 'magit-unstage-file
   "gp" 'magit-push
   "gd" 'magit-diff
 
