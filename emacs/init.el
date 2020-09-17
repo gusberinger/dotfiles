@@ -111,6 +111,7 @@
   :ensure t)
 
 ;; Org Settings
+(add-hook 'org-mode-hook 'org-indent-mode)
 (use-package deft
   :ensure t
   :config
@@ -118,12 +119,16 @@
 	deft-directory "~/Dropbox/notes"
 	deft-recursive t))
 
-(add-hook 'org-mode-hook 'org-indent-mode)
-
-(use-package org-bullets
+(use-package org-superstar
   :ensure t
   :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (setq org-superstar-headline-bullets-list '(" " "⁖" "◉" "○" "✸" "✿"))
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+
+;; (use-package org-bullets
+;;   :ensure t
+;;   :config
+;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (use-package mixed-pitch
   :ensure t
