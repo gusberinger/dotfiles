@@ -3,7 +3,7 @@
 	name = Gus Beringer
 	email = gusberinger@gmail.com
 [core]
-	excludesfile = /Users/gusberinger/.gitignore
+	excludesfile = ~/dotfiles/.gitignore
 [branch]
 	mergeoptions = --no-ff
 [alias]
