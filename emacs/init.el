@@ -54,6 +54,10 @@
   :config
   (evil-collection-init))
 
+(use-package evil-magit
+  :after evil
+  :ensure t)
+
 (use-package key-chord
   :ensure t
   :config
@@ -69,9 +73,6 @@
 (global-visual-line-mode 1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(if nil (string-equal system-type "darwin")
-    (menu-bar-mode -1)
-  (menu-bar-mode 1))
 
 (use-package base16-theme
   :ensure t
