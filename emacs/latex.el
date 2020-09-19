@@ -1,4 +1,5 @@
-;; Latex Settings
+;;; latex.el --- LaTeX Settings
+
 (use-package company-auctex
   :ensure t
   :after company)

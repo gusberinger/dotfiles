@@ -66,6 +66,14 @@
   :config
   (evil-commentary-mode))
 
+
+;; Linting
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode)
+  :config
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+
 ;; Theme Settings
 (global-visual-line-mode 1)
 (tool-bar-mode -1)
