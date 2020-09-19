@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: #+BEGIN_SRC emacs-lisp ... block
+# key: <se
+# uuid: <se
+# --
+#+BEGIN_SRC emacs-lisp
+$2
+#+END_SRC
