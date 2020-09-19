@@ -23,10 +23,10 @@
     (load-file "~/dotfiles/emacs/macos.el"))
 
 ;; Load Editor's Tools
+(load-file "~/dotfiles/emacs/ui.el")
 (load-file "~/dotfiles/emacs/evil.el")
 (load-file "~/dotfiles/emacs/editing.el")
 (load-file "~/dotfiles/emacs/writing.el")
-(load-file "~/dotfiles/emacs/ui.el")
 (load-file "~/dotfiles/emacs/bindings.el")
 
 ;; Load Language Specific Settings
@@ -34,4 +34,6 @@
 (load-file "~/dotfiles/emacs/lang/R.el")
 (load-file "~/dotfiles/emacs/lang/elisp.el")
 (load-file "~/dotfiles/emacs/lang/org.el")
-(load-file "~/dotfiles/emacs/lang/nov.el")
+
+;; Load Apps
+(load-file "~/dotfiles/emacs/apps/nov.el")
