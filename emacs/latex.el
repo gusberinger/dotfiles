@@ -36,3 +36,24 @@
     '(pdf-tools-handle-upgrades nil)) ; Use brew upgrade pdf-tools instead.
   (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo"))
 (pdf-tools-install)
+
+;; Bindings
+(my-local-leader-def '(normal emacs) LaTeX-mode-map
+  "a" 'TeX-command-run-all
+  "b" 'LaTeX-build
+  "c" 'reftex-citation
+
+  "r" '(:ignore t :which-key "Reftex")
+  "rc"    'reftex-citation
+  "rg"    'reftex-grep-document
+  "ri"    'reftex-index-selection-or-word
+  "rI"    'reftex-display-index
+  "r TAB" 'reftex-index
+  "rl"    'reftex-label
+  "rp"    'reftex-index-phrase-selection-or-word
+  "rP"    'reftex-index-visit-phrases-buffer
+  "rr"    'reftex-reference
+  "rs"    'reftex-search-document
+  "rt"    'reftex-toc
+  "rT"    'reftex-toc-recenter
+  "rv"    'reftex-view-crossref)
