@@ -27,3 +27,8 @@
   (setq deft-extensions '("txt" "tex" "org")
 	deft-directory "~/Dropbox/notes"
 	deft-recursive t))
+
+(use-package wc-mode
+  :ensure t)
+
+This is a count of the amount of words sdfsdf 

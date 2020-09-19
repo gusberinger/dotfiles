@@ -50,6 +50,7 @@
   "tt" 'counsel-load-theme
   "tv" 'variable-pitch-mode
   "tf" '(fly-check-mode -1)
+  "tz" 'wc-mode
 
   ;; Buffers
   "b" '(:ignore t :which-key "Buffers")
