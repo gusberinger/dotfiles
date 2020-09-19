@@ -86,8 +86,11 @@
 
   ;; Documentation
   "h" '(:ignore t :which-key "Help")
-  "hv" 'describe-variable
-  "ho" 'describe-symbol
+  "hv" 'counsel-describe-variable
+  "ho" 'counsel-describe-symbol
+  "hf" 'counsel-describe-function
+  "hs" 'describe-syntax
+  "hw" 'where-is
 
   ;; Applications
   "o" '(:ignore t :which-key "Open")
