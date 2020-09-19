@@ -30,9 +30,8 @@
 (load-file "~/dotfiles/emacs/bindings.el")
 
 ;; Load Language Specific Settings
-(load-file "~/dotfiles/emacs/latex.el")
-(load-file "~/dotfiles/emacs/R.el")
-(load-file "~/dotfiles/emacs/elisp.el")
-(load-file "~/dotfiles/emacs/org.el")
-(load-file "~/dotfiles/emacs/nov.el")
-
+(load-file "~/dotfiles/emacs/lang/latex.el")
+(load-file "~/dotfiles/emacs/lang/R.el")
+(load-file "~/dotfiles/emacs/lang/elisp.el")
+(load-file "~/dotfiles/emacs/lang/org.el")
+(load-file "~/dotfiles/emacs/lang/nov.el")
