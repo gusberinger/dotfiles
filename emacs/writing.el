@@ -30,5 +30,3 @@
 
 (use-package wc-mode
   :ensure t)
-
-This is a count of the amount of words sdfsdf 
