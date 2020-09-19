@@ -1,4 +1,5 @@
 ;;; bindings.el --- Key Bindings & Related Functions
+
 (defun open-last-buffer ()
   "Open the last buffer."
   (interactive)
@@ -49,7 +50,7 @@
   "tw" 'toggle-truncate-lines
   "tt" 'counsel-load-theme
   "tv" 'variable-pitch-mode
-  "tf" '(fly-check-mode -1)
+  "tf" 'flycheck-mode
   "tz" 'wc-mode
 
   ;; Buffers
