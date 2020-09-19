@@ -22,20 +22,17 @@
 (if (eq system-type 'darwin)
     (load-file "~/dotfiles/emacs/macos.el"))
 
-;; Load Evil
-(load-file "~/dotfiles/emacs/evil.el")
-
 ;; Load Editor's Tools
-(load-file "~/dotfiles/emacs/tools.el")
-
-; Load Bindings
+(load-file "~/dotfiles/emacs/evil.el")
+(load-file "~/dotfiles/emacs/editing.el")
+(load-file "~/dotfiles/emacs/writing.el")
+(load-file "~/dotfiles/emacs/ui.el")
 (load-file "~/dotfiles/emacs/bindings.el")
 
 ;; Load Language Specific Settings
 (load-file "~/dotfiles/emacs/latex.el")
 (load-file "~/dotfiles/emacs/R.el")
 (load-file "~/dotfiles/emacs/elisp.el")
-(load-file "~/dotfiles/emacs/writing.el")
 (load-file "~/dotfiles/emacs/org.el")
 (load-file "~/dotfiles/emacs/nov.el")
 
