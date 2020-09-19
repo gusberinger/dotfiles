@@ -23,11 +23,11 @@
     (load-file "~/dotfiles/emacs/macos.el"))
 
 ;; Load Editor's Tools
+(load-file "~/dotfiles/emacs/bindings.el")
 (load-file "~/dotfiles/emacs/ui.el")
 (load-file "~/dotfiles/emacs/evil.el")
 (load-file "~/dotfiles/emacs/editing.el")
 (load-file "~/dotfiles/emacs/writing.el")
-(load-file "~/dotfiles/emacs/bindings.el")
 
 ;; Load Language Specific Settings
 (load-file "~/dotfiles/emacs/lang/latex.el")
