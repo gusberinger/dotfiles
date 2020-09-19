@@ -22,7 +22,6 @@
 
 (recentf-mode 1)
 (advice-add #'yes-or-no-p :override #'y-or-n-p)
-(add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Supress Startup Message
 (setq inhibit-startup-message t
@@ -66,7 +65,6 @@
   :config
   (evil-commentary-mode))
 
-
 ;; Linting
 (use-package flycheck
   :ensure t
@@ -91,13 +89,6 @@
   :ensure t
   :config
   (telephone-line-mode 1))
-
-(setq-default prettify-symbols-alist '(("#+BEGIN_SRC" . "λ")
-                                       ("#+END_SRC" . "λ")
-                                       ("#+begin_src" . "λ")
-                                       ("#+end_src" . "λ")
-                                       (">=" . "≥")
-                                       ("=>" . "⇨")))
 
 ;; Auto-completion and Counsel
 (use-package company
@@ -128,66 +119,6 @@
 	'("~/dotfiles/emacs/custom-snippets"))
   (yas-global-mode 1))
 
-
-;; Org Settings
-(add-hook 'org-mode-hook 'org-indent-mode)
-(add-hook 'org-mode-hook 'prettify-symbols-mode)
-;; (add-hook 'prettify-symbols-mode (lambda () (setq-local org-hide-leading-stars nil)))
-(use-package deft
-  :ensure t
-  :config
-  (setq deft-extensions '("txt" "tex" "org")
-	deft-directory "~/Dropbox/notes"
-	deft-recursive t))
-
-(use-package org-superstar
-  :hook
-  (org-mode . org-superstar-mode)
-  :ensure t
-  :config
-  (setq org-superstar-leading-bullet ?\s
-	org-superstar-leading-fallback ?\s
-	org-superstar-item-bullet-alist "•"))
-	;; org-hide-leading-stars nil))
-
-(use-package mixed-pitch
-  :ensure t
-  :hook
-  (text-mode . mixed-pitch-mode))
-
-; code highliting in html exported src blocks
-(use-package htmlize
-  :ensure t)
-
-(setq org-hide-emphasis-markers t
-      org-html-htmlize-output-type 'css
-      org-src-fontify-natively t)
-
-(use-package org-gcal
-  :ensure t
-  :config
-  (load-file "~/Dropbox/emacs/org-gcal-config.el")
-  (setq org-gcal-file-alist '(("berin013@umn.edu" .  "~/Dropbox/notes/gcal.org"))))
-(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync)))
-(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync)))
-(setq org-hide-emphasis-markers t)
-
-;; Epub Settings
-(use-package nov
-  :ensure t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
-(defun my-nov-font-setup ()
-  (face-remap-add-relative 'variable-pitch :family "Liberation Serif"))
-                                           ;; :height 1.0))
-(add-hook 'nov-mode-hook 'my-nov-font-setup)
-
-;; Spellcheck
-(with-eval-after-load "ispell"
-	(setq ispell-program-name "aspell")
-	(ispell-set-spellchecker-params)
-	(setq ispell-dictionary "en_US"))
-
 ;; Git Settings
 (use-package magit
   :ensure t)
@@ -199,13 +130,6 @@
   (global-git-gutter-mode 1)
   :hook
   (magit-post-refresh . #'git-gutter:update-all-windows))
-
-
-;; Load Language Specific Settings
-(load-file "~/dotfiles/emacs/latex.el")
-(load-file "~/dotfiles/emacs/R.el")
-
-
 
 ;; Functions for Keybindings
 (defun my-shell-setup ()
@@ -265,6 +189,7 @@
   "tw" 'toggle-truncate-lines
   "tt" 'counsel-load-theme
   "tv" 'variable-pitch-mode
+  "tf" 'fly-check-mode
 
   ;; Buffers
   "b" '(:ignore t :which-key "Buffers")
@@ -314,4 +239,13 @@
 
 (my-local-leader-def '(normal emacs) org-mode-map
   "s" 'org-edit-special)
+
+
+;; Load Language Specific Settings
+(load-file "~/dotfiles/emacs/latex.el")
+(load-file "~/dotfiles/emacs/R.el")
+(load-file "~/dotfiles/emacs/writing.el")
+(load-file "~/dotfiles/emacs/org.el")
+(load-file "~/dotfiles/emacs/nov.el")
+
 
