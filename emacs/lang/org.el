@@ -38,6 +38,9 @@
   (load-file "~/Dropbox/emacs/org-gcal-config.el")
   (setq org-gcal-file-alist
 	'(("berin013@umn.edu" .  "~/Dropbox/notes/gcal.org"))))
+;; Example Config for org-gcal-config.el
+;; (setq org-gcal-client-id "client-id"
+;;       org-gcal-client-secret "client-secret")
 
 ;; Bindings
 (my-local-leader-def '(normal emacs) org-mode-map
