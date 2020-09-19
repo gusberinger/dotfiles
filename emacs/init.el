@@ -7,7 +7,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; Emacs Settings
+;;;; Emacs Settings
 (setq vc-follow-symlinks t
       ispell-program-name "/usr/local/bin/aspell"
       backup-directory-alist `(("." . "~/.saves"))
@@ -17,15 +17,12 @@
       recentf-max-saved-items 25
       user-full-name "Gus Beringer")
 
+(if (eq system-type 'darwin)
+    (load-file "macos.el"))
+
 (recentf-mode 1)
 (advice-add #'yes-or-no-p :override #'y-or-n-p)
-
-;; Fix macOS Path Issues
-(use-package exec-path-from-shell
-  :ensure t
-  :if (eq system-type 'darwin)
-  :config
-  (exec-path-from-shell-initialize))
+(add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Supress Startup Message
 (setq inhibit-startup-message t
@@ -334,8 +331,9 @@
   ;; Applications
   "o" '(:ignore t :which-key "Open")
   "oe" 'eshell
-  "ot" 'treemacs)
-
+  "ot" 'treemacs
+  "of" 'reveal-in-osx-finder)
+  
 (my-local-leader-def '(normal emacs) emacs-lisp-mode-map
   "c" 'eval-buffer
   "g" 'elint-current-buffer)
