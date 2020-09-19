@@ -39,3 +39,6 @@
   (setq org-gcal-file-alist
 	'(("berin013@umn.edu" .  "~/Dropbox/notes/gcal.org"))))
 
+;; Bindings
+(my-local-leader-def '(normal emacs) org-mode-map
+  "s" 'org-edit-special)
