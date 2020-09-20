@@ -12,7 +12,31 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq TeX-PDF-mode t
       auctex-latexmk-inherit-TeX-PDF-mode t
-      reftex-plug-into-AUCTeX t)
+      reftex-plug-into-AUCTeX t
+      TeX-master nil
+      TeX-source-correlate-mode t
+      TeX-source-correlate-start-server t)
+(eval-after-load "tex"
+  '(setcar (cdr (assoc 'output-pdf TeX-view-program-selection)) "Okular"))
+(require 'tex)
+(defun TeX-synctex-output-page ()
+  "Return the page corresponding to the current source position.
+This method assumes that the document was compiled with SyncTeX
+enabled and the `synctex' binary is available."
+  (let ((synctex-output
+	 (with-output-to-string
+	   (call-process "synctex" nil (list standard-output nil) nil "view"
+			 "-i" (format "%s:%s:%s" (line-number-at-pos)
+				      (current-column)
+				      ;; The real file name (not symbolic) fixed
+				      ;; for the synctex path bug
+                                      (concat (file-name-directory (file-truename (buffer-file-name)))
+                                              "./"
+                                              (file-name-nondirectory (buffer-file-name))))
+			 "-o" (TeX-active-master (TeX-output-extension))))))
+    (if (string-match "Page:\\([0-9]+\\)" synctex-output)
+	(match-string 1 synctex-output)
+      "1")))
 
 ;; Bindings
 (my-local-leader-def '(normal emacs) LaTeX-mode-map
@@ -61,3 +85,4 @@
   (progn  (make-local-variable 'after-save-hook)
       (add-hook 'after-save-hook 'LaTeX-build nil t))
     (kill-local-variable 'after-save-hook)))
+
