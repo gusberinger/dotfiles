@@ -8,6 +8,7 @@
       org-html-htmlize-output-type 'css
       org-src-preserve-indentation t
       org-src-fontify-natively t
+      org-confirm-babel-evaluate nil
       org-hide-leading-stars nil
       org-highlight-latex-and-related '(native script entities))
 
