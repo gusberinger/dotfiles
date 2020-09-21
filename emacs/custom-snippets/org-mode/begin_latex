@@ -3,6 +3,6 @@
 # key: <l
 # uuid: <l
 # --
-#+BEGIN_EXPORT latex
+#+BEGIN_LATEX
 $0
-#+END_EXPORT
+#+END_LATEX
