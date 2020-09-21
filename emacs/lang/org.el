@@ -6,9 +6,15 @@
 
 (setq org-hide-emphasis-markers t
       org-html-htmlize-output-type 'css
+      org-src-preserve-indentation t
       org-src-fontify-natively t
       org-hide-leading-stars nil
       org-highlight-latex-and-related '(native script entities))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((python . t)
+			     (R      . t)))
+
 
 (setq-default prettify-symbols-alist
 	      '(("#+BEGIN_SRC" . "λ")
