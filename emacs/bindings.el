@@ -44,13 +44,14 @@
   "fo" 'counsel-recentf
   "fp" 'open-init-file
 
-   ;; Display Settings
+   ;; Toggles 
   "t" '(:ignore t :which-key "Toggles")
   "tl" 'display-line-numbers-mode
   "tw" 'toggle-truncate-lines
   "tt" 'counsel-load-theme
   "tv" 'variable-pitch-mode
   "tf" 'flycheck-mode
+  "ts" 'flyspell-mode
   "tz" 'wc-mode
 
   ;; Buffers
