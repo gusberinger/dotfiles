@@ -3,7 +3,7 @@
 ;; Linting
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode)
+  ;; :init (global-flycheck-mode)
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)
 		flycheck-check-syntax-automatically '(save mode-enabled)
@@ -57,4 +57,20 @@
 	(setq buffer-face-mode-face '(:family "Hack Nerd Font" :height 160))
 	(buffer-face-mode))
 (add-hook 'eshell-mode-hook #'my-shell-setup)
+
+
+;; Project Management
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+
+(use-package counsel-projectile
+  :after projectile
+  :ensure t)
+
+
+
  
