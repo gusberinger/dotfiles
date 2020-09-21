@@ -1,10 +1,13 @@
-#+TITLE: TODO
+#+TITLE: TODO LIST
 
-1) Add window bindings
-2) Add search bindings
-3) Add buffer bindings
-4) Add REPL bindings
-5) Add org-bindings
-6) Add projectile support
-7) Add documentation bindings
-8) Add more magit bindings
+* Finish Soon
+** TODO Add search bindings
+** TODO Add projectile support
+** TODO Add Org-roam bindings
+** TODO Add Org-Ref Bindings
+** TODO Write Org-Captures Templates
+** TODO Implement Org-Capture bindings and scripts.
+** TODO Add more org-mode bindings
+* Long Term
+** TODO Learn hydra
+** TODO Fix LaTeX synctex issues.
