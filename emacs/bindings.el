@@ -32,13 +32,16 @@
   :prefix "SPC m")
 
 (my-leader-def '(normal emacs)
-  "TAB" 'last-buffer
+  "TAB" 'open-last-buffer
   "SPC" 'counsel-M-x
   "a" 'org-agenda
   "u" 'counsel-bookmark
   "c" 'org-capture
   "n" 'deft
   "p" 'projectile-command-map
+
+  ;; Spelling
+  "zg" 'add-word-to-personal-dictionary
 
   ;; Files
   "f" '(:ignore t :which-key "Files")
