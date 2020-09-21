@@ -3,6 +3,7 @@
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 (defun add-word-to-personal-dictionary ()
+  "Mark word as correct and add to dictionary"
   (interactive)
   (let ((current-location (point))
         (word (flyspell-get-word)))
