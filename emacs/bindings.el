@@ -38,6 +38,7 @@
   "u" 'counsel-bookmark
   "c" 'org-capture
   "n" 'deft
+  "p" 'projectile-command-map
 
   ;; Files
   "f" '(:ignore t :which-key "Files")
