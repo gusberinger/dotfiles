@@ -22,6 +22,11 @@
   (setq ivy-use-virtual-buffers t
 	ivy-count-format "%d/%d "))
 
+(use-package ivy-rich
+  :ensure t
+  :config
+  (ivy-rich-mode 1))
+
 (use-package counsel
   :ensure t
   :config
@@ -63,13 +68,15 @@
 (use-package projectile
   :ensure t
   :config
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  ;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  ;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-completion-system 'ivy)
   (projectile-mode +1))
 
 (use-package counsel-projectile
   :after projectile
   :ensure t)
+
 
 
 
