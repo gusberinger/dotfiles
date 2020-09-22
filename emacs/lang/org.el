@@ -28,6 +28,7 @@
                 ("#+begin_quote" . "“")
                 ("#+end_quote" . "”")
 		("---" . "—")
+		("\\\\" . " ")
                 (">=" . "≥")
                 ("=>" . "⇨")))
 
@@ -108,6 +109,7 @@
 ;; Bindings
 (my-local-leader-def '(normal emacs) org-mode-map
   "s" 'org-edit-special
+  "c" 'org-ref-cite
   "f" 'org-roam-find-file)
 
 (use-package org-roam
