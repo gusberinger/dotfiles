@@ -25,9 +25,17 @@
 (use-package deft
   :ensure t
   :config
-  (setq deft-extensions '("txt" "tex" "org")
+  (setq deft-extensions '("org")
 	deft-directory "~/Dropbox/notes"
 	deft-recursive t))
 
 (use-package wc-mode
   :ensure t)
+
+(use-package define-word
+  :ensure t)
+
+
+(my-local-leader-def '(normal emacs) text-mode-map
+  "d" 'define-word-at-point
+  "D" 'define-word)
