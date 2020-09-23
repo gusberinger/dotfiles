@@ -23,10 +23,18 @@
                 ("#+END_SRC" . "λ")
                 ("#+begin_src" . "λ")
                 ("#+end_src" . "λ")
-		("#+BEGIN_QUOTE" . "“")
-                ("#+END_QUOTE" . "”")
-                ("#+begin_quote" . "“")
-                ("#+end_quote" . "”")
+		("#+BEGIN_VERSE" . "»")
+                ("#+END_VERSE" . "»")
+                ("#+begin_verse" . "»")
+                ("#+end_verse" . "»")
+		("#+BEGIN_QUOTE" . "»")
+                ("#+END_QUOTE" . "»")
+                ("#+begin_quote" . "»")
+                ("#+end_quote" . "»")
+		;; ("#+BEGIN_QUOTE" . "“")
+                ;; ("#+END_QUOTE" . "”")
+                ;; ("#+begin_quote" . "“")
+                ;; ("#+end_quote" . "”")
 		("---" . "—")
 		("\\\\" . " ")
                 (">=" . "≥")
@@ -108,6 +116,7 @@
 
 ;; Bindings
 (my-local-leader-def '(normal emacs) org-mode-map
+  "zn" #'org-tree-to-indirect-buffer
   "s" 'org-edit-special
   "c" 'org-ref-cite
   "f" 'org-roam-find-file)
@@ -124,3 +133,7 @@
   :ensure t
   :config
   (push 'company-org-roam company-backends))
+
+
+(use-package interleave
+  :ensure t)
