@@ -1,0 +1,13 @@
+#+TITLE: TODO LIST
+
+* Finish Soon
+** TODO Add search bindings
+** TODO Add projectile support
+** TODO Add Org-roam bindings
+** TODO Add Org-Ref Bindings
+** TODO Write Org-Captures Templates
+** TODO Implement Org-Capture bindings and scripts.
+** TODO Add more org-mode bindings
+* Long Term
+** TODO Learn hydra
+** TODO Fix LaTeX synctex issues.

@@ -32,25 +32,30 @@
   :prefix "SPC m")
 
 (my-leader-def '(normal emacs)
-  "TAB" 'last-buffer
+  "TAB" 'open-last-buffer
   "SPC" 'counsel-M-x
   "a" 'org-agenda
   "u" 'counsel-bookmark
   "c" 'org-capture
   "n" 'deft
+  "p" 'projectile-command-map
+
+  ;; Spelling
+  "zg" 'add-word-to-personal-dictionary
 
   ;; Files
   "f" '(:ignore t :which-key "Files")
   "fo" 'counsel-recentf
   "fp" 'open-init-file
 
-   ;; Display Settings
+   ;; Toggles 
   "t" '(:ignore t :which-key "Toggles")
   "tl" 'display-line-numbers-mode
   "tw" 'toggle-truncate-lines
   "tt" 'counsel-load-theme
   "tv" 'variable-pitch-mode
   "tf" 'flycheck-mode
+  "ts" 'flyspell-mode
   "tz" 'wc-mode
 
   ;; Buffers

@@ -28,7 +28,7 @@ EOPLUGINS
     zgen save
 fi
 
-PROMPT=' %~ %F{red}λ '
+PROMPT=' %3~ %F{red}λ '
 
 ## libffi
 export LDFLAGS="-L/usr/local/opt/libffi/lib"

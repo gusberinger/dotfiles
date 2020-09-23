@@ -2,29 +2,68 @@
 
 (add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook 'prettify-symbols-mode)
+(add-hook 'org-mode-hook 'org-toggle-pretty-entities)
 
 (setq org-hide-emphasis-markers t
       org-html-htmlize-output-type 'css
+      org-src-preserve-indentation t
       org-src-fontify-natively t
-      org-hide-leading-stars nil)
+      org-confirm-babel-evaluate nil
+      org-hide-leading-stars nil
+      org-highlight-latex-and-related '(native script entities))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((python . t)
+			     (java   . t)
+			     (R      . t)))
+
 
 (setq-default prettify-symbols-alist
 	      '(("#+BEGIN_SRC" . "λ")
                 ("#+END_SRC" . "λ")
                 ("#+begin_src" . "λ")
                 ("#+end_src" . "λ")
+		("#+BEGIN_QUOTE" . "“")
+                ("#+END_QUOTE" . "”")
+                ("#+begin_quote" . "“")
+                ("#+end_quote" . "”")
+		("---" . "—")
+		("\\\\" . " ")
                 (">=" . "≥")
                 ("=>" . "⇨")))
 
 ;; Nice looking bullets
-(use-package org-superstar
-  :hook
-  (org-mode . org-superstar-mode)
+;; (use-package org-superstar
+;;   :hook
+;;   (org-mode . org-superstar-mode)
+;;   :ensure t
+;;   :config
+;;   (setq org-superstar-leading-bullet ?\s
+;; 	org-superstar-leading-fallback ?\s
+;; 	org-superstar-item-bullet-alist "•"))
+
+
+(use-package org-ref
   :ensure t
   :config
-  (setq org-superstar-leading-bullet ?\s
-	org-superstar-leading-fallback ?\s
-	org-superstar-item-bullet-alist "•"))
+  (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib")
+				org-ref-bibliography-notes "~/Dropbox/bibliography/notes.org"
+				org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
+				org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/"
+				bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
+				bibtex-completion-library-path "~/Dropbox/bibliography/bibtex-pdfs"
+				bibtex-completion-notes-path "~/Dropbox/bibliography/helm-bibtex-notes")
+
+	;; open pdf with system pdf viewer (works on mac)
+	(setq bibtex-completion-pdf-open-function
+	  (lambda (fpath)
+		  (start-process "open" "*open*" "open" fpath))))
+
+
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;; Better lists
 (font-lock-add-keywords 'org-mode
@@ -52,7 +91,6 @@
                           `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
                           `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
 
-
 ;; Code highlighting in html exported src blocks
 (use-package htmlize
   :ensure t)
@@ -70,13 +108,19 @@
 
 ;; Bindings
 (my-local-leader-def '(normal emacs) org-mode-map
-  "s" 'org-edit-special)
+  "s" 'org-edit-special
+  "c" 'org-ref-cite
+  "f" 'org-roam-find-file)
 
-(use-package org-mind-map
-  :init
-  (require 'ox-org)
+(use-package org-roam
   :ensure t
-  ;; Uncomment the below if 'ensure-system-packages` is installed
-  ;;:ensure-system-package (gvgen . graphviz)
+  :hook
+  (after-init . org-roam-mode)
+  :custom
+  (org-roam-db-location "~/.emacs.d/roam.db")
+  (org-roam-directory "~/Dropbox/notes/"))
+
+(use-package company-org-roam
+  :ensure t
   :config
-  (setq org-mind-map-engine "dot"))
+  (push 'company-org-roam company-backends))
