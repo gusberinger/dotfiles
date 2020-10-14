@@ -10,7 +10,8 @@
       org-src-fontify-natively t
       org-confirm-babel-evaluate nil
       org-hide-leading-stars nil
-      org-highlight-latex-and-related '(native script entities))
+      org-highlight-latex-and-related '(native script entities)
+      org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE")))
 
 (org-babel-do-load-languages
  'org-babel-load-languages '((python . t)
@@ -55,12 +56,13 @@
   :ensure t
   :config
   (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib")
-				org-ref-bibliography-notes "~/Dropbox/bibliography/notes.org"
-				org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
-				org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/"
-				bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
-				bibtex-completion-library-path "~/Dropbox/bibliography/bibtex-pdfs"
-				bibtex-completion-notes-path "~/Dropbox/bibliography/helm-bibtex-notes")
+	org-ref-bibliography-notes "~/Dropbox/bibliography/notes.org"
+	org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
+	org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/"
+	bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
+	bibtex-completion-library-path "~/Dropbox/bibliography/bibtex-pdfs"
+	bibtex-completion-notes-path "~/Dropbox/bibliography/helm-bibtex-notes"
+	org-ref-completion-library 'org-ref-ivy-bibtex)
 
 	;; open pdf with system pdf viewer (works on mac)
 	(setq bibtex-completion-pdf-open-function
@@ -118,7 +120,8 @@
 (my-local-leader-def '(normal emacs) org-mode-map
   "zn" #'org-tree-to-indirect-buffer
   "s" 'org-edit-special
-  "c" 'org-ref-cite
+  "rc" 'org-ref-ivy-insert-cite-link
+  "rb" 'crossref-add-bibtex-entry
   "f" 'org-roam-find-file)
 
 (use-package org-roam
