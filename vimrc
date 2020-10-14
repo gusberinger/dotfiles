@@ -15,6 +15,7 @@ Plug 'jceb/vim-orgmode' " org-mode
 Plug 'vim-scripts/SyntaxRange' " highlight codeblocks
 Plug 'tpope/vim-speeddating' " needed for orgmode
 Plug 'honza/vim-snippets/'
+Plug 'JuliaEditorSupport/julia-vim'
 call plug#end()
 
 """ Basic  Configuration
@@ -59,6 +60,7 @@ nnoremap yyy :%w !pbcopy<cr><cr>|" yank entire document
 
 """ Leader Mappings
 let mapleader="\<space>"
+let maplocalleader="\<space>m"
 nnoremap <leader><space> :nohl<cr>
 nnoremap <leader>ev :vsp $MYVIMRC<cr>
 nnoremap <leader>sv :so $MYVIMRC<cr>
@@ -87,6 +89,7 @@ let g:vimtex_fold_enabled = 1
 let g:vimtex_echo_ignore_wait = 1
 let g:vimtex_quickfix_open_on_warning = 0
 let g:syntastic_tex_chktex_showmsgs = 0
+let g:tex_flavor = 'tex'
 nnoremap <tab> za |" toggle fold
 
 
