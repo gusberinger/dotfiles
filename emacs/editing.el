@@ -32,6 +32,9 @@
   :config
   (setcdr (assoc 'counsel-M-x ivy-initial-inputs-alist) ""))
 
+(use-package hydra
+  :ensure t)
+
 (use-package swiper
   :ensure t)
 
